@@ -6,10 +6,10 @@ var EventEmitter = require('events').EventEmitter,
     gcsdk_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/gcsdk_gcmessages.desc")),
     csgo_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/cstrike15_gcmessages.desc")),
     protoMask = 0x80000000,
-    bignumber = require("bignumber.js"),
-    CSGO = exports = {};
+    bignumber = require("bignumber.js");
 
 
+CSGO = {};
 var CSGOClient = function(steamClient, debug) {
   EventEmitter.call(this);
 
@@ -52,7 +52,7 @@ var CSGOClient = function(steamClient, debug) {
 };
 util.inherits(CSGOClient, EventEmitter);
 
-require("./generated/messages");
+require("./generated/messages")(CSGO);
 
 CSGOClient.prototype.ServerRegion = CSGO.ServerRegion;
 CSGOClient.prototype.GameMode = CSGO.GameMode;
@@ -141,5 +141,7 @@ handlers[CSGO.EGCBaseClientMsg.k_EMsgGCClientConnectionStatus] = function gcClie
 };
 
 CSGO.CSGOClient = CSGOClient;
+
+module.exports = CSGO;
 
 require("./handlers/match");
