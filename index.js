@@ -7,10 +7,10 @@ var EventEmitter = require('events').EventEmitter,
     csgo_gcmessages = new Schema(fs.readFileSync(__dirname + "/generated/cstrike15_gcmessages.desc")),
     protoMask = 0x80000000,
     bignumber = require("bignumber.js"),
-    CSGO = exports;
-    
+    CSGO = exports = {};
 
-var CSGOClient = function CSGOClient(steamClient, debug) {
+
+var CSGOClient = function(steamClient, debug) {
   EventEmitter.call(this);
 
   this.debug = debug || false;
